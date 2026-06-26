@@ -1,0 +1,521 @@
+/* =========================================================
+   CHECKLIST RENAULT MASTER — LÍNEA SAN MARTÍN
+   Paleta corporativa + diseño mobile-first para uso en campo
+   ========================================================= */
+
+:root {
+  /* Paleta — celeste corporativo Trenes Argentinos + soporte */
+  --color-primary: #0B5C8C;
+  --color-primary-dark: #073F61;
+  --color-primary-light: #4A9CC7;
+  --color-accent: #E8A33D;       /* color combustible / alertas suaves */
+  --color-bg: #F2F5F7;
+  --color-card: #FFFFFF;
+  --color-ok: #1E8E5A;
+  --color-bad: #C8372F;
+  --color-text: #1C2B33;
+  --color-text-muted: #5A6B73;
+  --color-border: #DCE4E8;
+
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --shadow-card: 0 2px 10px rgba(11, 92, 140, 0.08);
+  --shadow-elevated: 0 8px 28px rgba(7, 63, 97, 0.18);
+
+  --font-display: 'Inter', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  -webkit-tap-highlight-color: transparent;
+  scroll-padding-bottom: 90px;
+}
+
+body {
+  margin: 0;
+  overscroll-behavior-y: contain;
+}
+
+/* Foco visible accesible en toda la app */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+.btn-toggle:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.app-screen {
+  min-height: 100vh;
+}
+
+/* =========================== BOOT =========================== */
+#screen-boot {
+  background: linear-gradient(160deg, var(--color-primary-dark), var(--color-primary));
+}
+
+/* =========================== LOGIN =========================== */
+#screen-login {
+  background: linear-gradient(160deg, var(--color-primary-dark), var(--color-primary) 60%, var(--color-primary-light));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+}
+
+.login-wrap {
+  width: 100%;
+  max-width: 440px;
+}
+
+.login-card {
+  background: var(--color-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-elevated);
+  padding: 36px 28px;
+}
+
+.brand-block .brand-line {
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.brand-block .brand-title {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.4rem;
+  color: var(--color-primary-dark);
+  letter-spacing: 0.01em;
+}
+
+.login-heading {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 8px;
+  margin-bottom: 4px;
+  color: var(--color-text);
+}
+
+.login-sub {
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: 0.92rem;
+  margin-bottom: 0;
+}
+
+.login-footnote {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+}
+
+#google-btn-container {
+  min-height: 44px;
+}
+
+/* =========================== HEADER =========================== */
+.app-header {
+  background: var(--color-primary-dark);
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+}
+
+.header-brand {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.header-brand-line {
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  color: rgba(255,255,255,0.7);
+}
+
+.header-brand-title {
+  font-weight: 800;
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+}
+
+.btn-user {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.18);
+  color: #fff;
+  border-radius: 999px;
+  padding: 4px 12px;
+}
+.btn-user:hover, .btn-user:focus { background: rgba(255,255,255,0.16); color: #fff; }
+
+.user-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #fff;
+}
+
+/* =========================== STEP PROGRESS =========================== */
+.step-progress-wrap {
+  background: var(--color-card);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 48px;
+  z-index: 1010;
+  overflow-x: auto;
+}
+
+.step-progress {
+  display: flex;
+  align-items: center;
+  padding: 10px 4px;
+  min-width: max-content;
+  gap: 2px;
+}
+
+.step-dot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 56px;
+  opacity: 0.45;
+  transition: opacity 0.2s ease;
+}
+
+.step-dot span {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--color-border);
+  color: var(--color-text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.step-dot label {
+  font-size: 0.68rem;
+  margin-top: 4px;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.step-dot.active,
+.step-dot.completed {
+  opacity: 1;
+}
+
+.step-dot.active span {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.step-dot.completed span {
+  background: var(--color-ok);
+  color: #fff;
+}
+
+.step-line {
+  width: 18px;
+  height: 2px;
+  background: var(--color-border);
+  flex-shrink: 0;
+}
+
+/* =========================== MAIN / FORM =========================== */
+.app-main {
+  padding-bottom: 140px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.form-step { display: none; }
+.form-step.active { display: block; animation: fadeIn 0.25s ease; }
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.step-card {
+  background: var(--color-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: 22px 20px;
+  margin-top: 16px;
+}
+
+.step-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.step-title i { color: var(--color-primary); }
+
+.form-label {
+  font-weight: 600;
+  font-size: 0.88rem;
+  color: var(--color-text);
+}
+
+.form-label.required::after {
+  content: " *";
+  color: var(--color-bad);
+}
+
+.form-control, .form-select {
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--color-border);
+  padding: 0.65rem 0.9rem;
+}
+
+.form-control:focus, .form-select:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(11, 92, 140, 0.15);
+}
+
+.form-control-lg {
+  font-size: 1.05rem;
+}
+
+/* ---- Botones de selección Sí/No, Bien/Mal (grandes, táctiles) ---- */
+.btn-group-toggle {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-toggle {
+  flex: 1;
+  border: 2px solid var(--color-border);
+  background: #fff;
+  border-radius: var(--radius-md);
+  padding: 12px 10px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  transition: all 0.15s ease;
+  min-height: 48px;
+}
+
+.btn-toggle:hover { border-color: var(--color-primary-light); }
+
+.btn-toggle.selected.btn-toggle-yes,
+.btn-toggle.selected.btn-toggle-bien {
+  background: var(--color-ok);
+  border-color: var(--color-ok);
+  color: #fff;
+}
+
+.btn-toggle.selected.btn-toggle-no,
+.btn-toggle.selected.btn-toggle-mal {
+  background: var(--color-bad);
+  border-color: var(--color-bad);
+  color: #fff;
+}
+
+/* ---- Listado de checks (Luces, Motor, Accesorios) ---- */
+.check-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.check-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--color-border);
+  scroll-margin-bottom: 90px;
+}
+
+.check-row:last-child { border-bottom: none; padding-bottom: 0; }
+
+.check-row > span {
+  font-weight: 600;
+  flex: 1 1 auto;
+  min-width: 110px;
+}
+
+.check-row .btn-group-toggle {
+  flex: 0 0 auto;
+  width: 180px;
+}
+
+@media (max-width: 420px) {
+  .check-row { flex-wrap: wrap; }
+  .check-row .btn-group-toggle { width: 100%; }
+}
+
+/* ---- Combustible (gauge) ---- */
+.fuel-gauge-wrap { padding: 4px 2px; }
+
+.form-range::-webkit-slider-thumb { background: var(--color-primary); }
+.form-range::-moz-range-thumb { background: var(--color-primary); }
+.form-range::-webkit-slider-runnable-track {
+  background: linear-gradient(90deg, var(--color-bad), var(--color-accent), var(--color-ok));
+  height: 6px;
+  border-radius: 3px;
+}
+.form-range::-moz-range-track {
+  background: linear-gradient(90deg, var(--color-bad), var(--color-accent), var(--color-ok));
+  height: 6px;
+  border-radius: 3px;
+}
+
+.fuel-labels {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 6px;
+  font-weight: 700;
+}
+
+.fuel-e { color: var(--color-bad); }
+.fuel-f { color: var(--color-ok); }
+.fuel-value {
+  background: var(--color-primary);
+  color: #fff;
+  padding: 2px 12px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+}
+
+/* ---- Resumen final ---- */
+.resumen-box {
+  background: var(--color-bg);
+  border-radius: var(--radius-md);
+  padding: 16px;
+}
+
+.resumen-section {
+  margin-bottom: 14px;
+}
+
+.resumen-section h3 {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+  margin-bottom: 8px;
+}
+
+.resumen-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.92rem;
+  padding: 5px 0;
+  border-bottom: 1px dashed var(--color-border);
+}
+.resumen-row:last-child { border-bottom: none; }
+
+.resumen-row .badge-bien { color: var(--color-ok); font-weight: 700; }
+.resumen-row .badge-mal { color: var(--color-bad); font-weight: 700; }
+
+.signature-box {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--color-bg);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+}
+
+.signature-box i {
+  font-size: 1.6rem;
+  color: var(--color-primary);
+}
+
+/* =========================== FOOTER NAV =========================== */
+.app-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--color-card);
+  border-top: 1px solid var(--color-border);
+  box-shadow: 0 -4px 16px rgba(0,0,0,0.06);
+  z-index: 1030;
+}
+
+.btn-primary-app {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+  font-weight: 700;
+}
+.btn-primary-app:hover, .btn-primary-app:focus {
+  background: var(--color-primary-dark);
+  border-color: var(--color-primary-dark);
+  color: #fff;
+}
+
+.btn-lg { border-radius: var(--radius-md); min-height: 52px; }
+
+/* =========================== SUCCESS =========================== */
+#screen-success {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg);
+}
+
+.success-wrap { max-width: 360px; padding: 24px; }
+
+.success-icon {
+  font-size: 4.5rem;
+  color: var(--color-ok);
+}
+
+/* =========================== OVERLAY DE ENVÍO =========================== */
+.submit-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(7, 63, 97, 0.82);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1200;
+}
+
+/* =========================== TOAST =========================== */
+.toast {
+  background: var(--color-primary-dark);
+  color: #fff;
+  border: none;
+}
+
+/* =========================== UTILIDADES =========================== */
+.text-uppercase { text-transform: uppercase; }
+
+@media (min-width: 768px) {
+  .app-main { padding-top: 4px; }
+  .step-card { padding: 32px 36px; }
+}
