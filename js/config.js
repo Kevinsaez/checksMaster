@@ -9,5 +9,5 @@ const APP_CONFIG = {
 
   APPS_SCRIPT_URL: "https://script.google.com/macros/s/AKfycbxGlG6rly8s-zwDGLu7c23GExqq4A0h0llYI5dQZc-O1a9q78rPRoRNAujuTQzpnJTH/exec",
 
-  APP_NAME: "Checklist Renault Master",
+  APP_NAME: "Backend Checklist",
 };
