@@ -1,0 +1,6 @@
+[[redirects]]
+  from = "/api/*"
+  to = "https://script.google.com/macros/s/AKfycbxGlG6rly8s-zwDGLu7c23GExqq4A0h0llYI5dQZc-O1a9q78rPRoRNAujuTQzpnJTH/exec/:splat"
+  status = 200
+  force = true
+  headers = {X-From = "Netlify"}
