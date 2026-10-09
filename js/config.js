@@ -7,7 +7,7 @@
 const APP_CONFIG = {
   GOOGLE_CLIENT_ID: "682039260541-t4nhim9g8afq2t875tqsf1hm2ul0qi6d.apps.googleusercontent.com",
 
-  APPS_SCRIPT_URL: "https://script.google.com/macros/s/AKfycbz5i5rABlREApHWY0kQljMLYDEGjvo9OlMYOmX9LTcYR4vkuRxAmuAheibnwGZbsNSPdw/exec",
+  APPS_SCRIPT_URL: "https://script.google.com/macros/s/AKfycbxGlG6rly8s-zwDGLu7c23GExqq4A0h0llYI5dQZc-O1a9q78rPRoRNAujuTQzpnJTH/exec",
 
   APP_NAME: "Checklist Renault Master",
 };
