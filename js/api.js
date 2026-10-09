@@ -1,52 +1,32 @@
 /* =========================================================
    API.JS
    Toda la comunicación con el backend (Google Apps Script).
-   El backend recibe el idToken de Google en cada request,
-   lo valida, y solo entonces lee/escribe en el Sheet.
+   Usa un GET con los datos en la query string para evitar
+   el problema de CORS que Apps Script tiene con POST+redirect.
+   El backend recibe el payload en e.parameter.payload.
    ========================================================= */
 
 const Api = (() => {
-  /**
-   * Llama al backend para verificar si el usuario logueado
-   * está autorizado (existe en la pestaña "Choferes" y activo = SI).
-   * Devuelve { authorized: bool, legajo, nombre, message }
-   */
   async function verificarChofer(idToken) {
-    return postToBackend({
-      action: "verificarChofer",
-      idToken,
-    });
+    return callBackend({ action: "verificarChofer", idToken });
   }
 
-  /**
-   * Envía el checklist completo para que se guarde como
-   * una fila nueva en la pestaña "Checklists" del Sheet.
-   */
   async function enviarChecklist(idToken, datosChecklist) {
-    return postToBackend({
-      action: "guardarChecklist",
-      idToken,
-      data: datosChecklist,
-    });
+    return callBackend({ action: "guardarChecklist", idToken, data: datosChecklist });
   }
 
-  async function postToBackend(body) {
-    if (
-      !APP_CONFIG.APPS_SCRIPT_URL ||
-      APP_CONFIG.APPS_SCRIPT_URL.includes("TU_DEPLOYMENT_ID")
-    ) {
-      throw new Error(
-        "Todavía no configuraste la URL de Apps Script en js/config.js"
-      );
+  async function callBackend(body) {
+    if (!APP_CONFIG.APPS_SCRIPT_URL || APP_CONFIG.APPS_SCRIPT_URL.includes("TU_DEPLOYMENT_ID")) {
+      throw new Error("Todavía no configuraste la URL de Apps Script en js/config.js");
     }
 
-    const response = await fetch(APP_CONFIG.APPS_SCRIPT_URL, {
-      method: "POST",
-      // Apps Script Web Apps esperan text/plain para evitar
-      // el preflight CORS de application/json en algunos casos.
-      headers: { "Content-Type": "text/plain;charset=utf-8" },
-      body: JSON.stringify(body),
-    });
+    // Apps Script tiene un problema conocido de CORS con POST que hace redirect.
+    // La solución es enviar via GET con el payload en un query param,
+    // lo que evita el preflight y el redirect que rompe los headers CORS.
+    const payload = encodeURIComponent(JSON.stringify(body));
+    const url = APP_CONFIG.APPS_SCRIPT_URL + "?payload=" + payload;
+
+    const response = await fetch(url, { method: "GET" });
 
     if (!response.ok) {
       throw new Error("Error de red al contactar el servidor (" + response.status + ")");
